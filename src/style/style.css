@@ -1,1 +1,126 @@
-/*# sourceMappingURL=style.css.map */
+* {
+  margin: 0px;
+  padding: 0px;
+  direction: rtl;
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+.ly-login {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.cm-loginBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 50px 25px;
+  border: 1px rgba(96, 87, 228, 0.7607843137) solid;
+  border-radius: 10px;
+}
+.cm-loginBox input {
+  width: 250px;
+  padding: 5px 0px;
+  text-align: center;
+  margin: 10px;
+}
+.cm-loginBox img {
+  width: 100%;
+  cursor: pointer;
+}
+.cm-loginBox button {
+  width: 250px;
+  padding: 5px 0px;
+}
+
+.ly-desk {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+}
+
+.cm-menu {
+  height: 100%;
+  width: 250px;
+  background: rgba(96, 87, 228, 0.7607843137);
+}
+.cm-menu .userBx {
+  display: flex;
+  flex-direction: row;
+  margin: 10px;
+  border-radius: 10px;
+  background: rgba(22, 14, 128, 0.7607843137);
+  height: 70px;
+  align-items: center;
+  justify-content: space-around;
+}
+.cm-menu .userBx p {
+  color: #ffffff;
+  font-weight: bold;
+}
+.cm-menu .userBx button {
+  width: 90px;
+  background: #ff9b58;
+  border: 0px;
+  padding: 3px 0px;
+}
+.cm-menu .itemMenu {
+  font-size: 14pt;
+  color: #ffffff;
+  cursor: pointer;
+  margin-right: 15px;
+  margin-top: 20px;
+}
+
+.pg {
+  flex: 1;
+  height: 100%;
+}
+
+.pallet {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  height: 150px;
+  margin: 20px;
+}
+.pallet .bx {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  align-items: center;
+  justify-content: space-around;
+  margin: 20px;
+  border: 1px rgba(22, 14, 128, 0.7607843137) solid;
+  flex: 1;
+}
+
+.typeColor {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+}
+.typeColor > div {
+  border: 1px rgba(22, 14, 128, 0.7607843137) solid;
+  height: 80px;
+  width: 150px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.typeColor > div p {
+  text-align: center;
+  font-size: 15pt;
+  font-weight: bold;
+}/*# sourceMappingURL=style.css.map */

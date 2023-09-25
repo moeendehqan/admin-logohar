@@ -1,0 +1,138 @@
+
+
+
+$colorBlue1:#6057e4c2;
+$colorBlue2:#160e80c2;
+$colorWhite1:#ffffff;
+$colorOrange1:#ff9b58;
+*{
+    margin: 0px;
+    padding: 0px;
+    direction: rtl;
+}
+html,body,#root{
+    height: 100%;
+}
+
+.ly-login{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.cm-loginBox{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 50px 25px;
+    border: 1px $colorBlue1 solid;
+    border-radius: 10px;
+    input{
+        width: 250px;
+        padding: 5px 0px;
+        text-align: center;
+        margin: 10px;
+
+    }
+    img{
+        width: 100%;
+        cursor: pointer;
+    }
+    button{
+        width: 250px;
+        padding: 5px 0px;
+    }
+
+}
+
+.ly-desk{
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+
+
+}
+
+.cm-menu{
+    height: 100%;
+    width: 250px;
+    background: $colorBlue1;
+    .userBx{
+        display: flex;
+        flex-direction: row;
+        margin: 10px;
+        border-radius: 10px;
+        background: $colorBlue2;
+        height: 70px;
+        align-items: center;
+        justify-content: space-around;
+        p{
+            color: $colorWhite1;
+            font-weight: bold;
+        }
+        button{
+            width: 90px;
+            background: $colorOrange1;
+            border: 0px;
+            padding: 3px 0px;
+        }
+    }
+    .itemMenu{
+        font-size: 14pt;
+        color: $colorWhite1;
+        cursor: pointer;
+        margin-right: 15px;
+        margin-top: 20px;
+    }
+
+}
+
+.pg{
+    flex: 1;
+    height: 100%;
+
+}
+
+.pallet{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    height: 150px;
+    margin: 20px;
+    .bx{
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        align-items: center;
+        justify-content: space-around;
+        margin: 20px;
+        border: 1px $colorBlue2 solid;
+        flex: 1;
+    }
+}
+
+.typeColor{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    >div{
+        border: 1px $colorBlue2 solid;
+        height: 80px;
+        width: 150px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        p{
+            text-align: center;
+            font-size: 15pt;
+            font-weight: bold;
+        }
+    }
+}

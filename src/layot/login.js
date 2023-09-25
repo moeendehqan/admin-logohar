@@ -3,7 +3,7 @@ import LoginBox from "../componet/loginBox"
 
 const Login = () =>{
     return(
-        <div>
+        <div className="ly-login">
             <LoginBox />
         </div>
     )
