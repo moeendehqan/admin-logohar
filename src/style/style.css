@@ -81,26 +81,43 @@ html, body, #root {
 
 .pg {
   flex: 1;
-  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .pallet {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
   justify-content: space-around;
-  height: 150px;
-  margin: 20px;
+  width: 100%;
+  border-bottom: 1px rgba(96, 87, 228, 0.7607843137) solid;
+  padding: 20px 0px;
 }
-.pallet .bx {
+.pallet .bxs {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+.pallet .bxs .bx {
   display: flex;
   flex-direction: column;
   height: 100%;
   align-items: center;
   justify-content: space-around;
-  margin: 20px;
   border: 1px rgba(22, 14, 128, 0.7607843137) solid;
   flex: 1;
+  margin: 10px 20px;
+}
+
+.conteiner {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  padding: 20px 0px;
+  border-bottom: 1px rgba(96, 87, 228, 0.7607843137) solid;
 }
 
 .typeColor {
@@ -123,4 +140,64 @@ html, body, #root {
   text-align: center;
   font-size: 15pt;
   font-weight: bold;
+}
+.typeColor .typslc {
+  background: rgba(22, 14, 128, 0.7607843137);
+}
+.typeColor .typslc p {
+  color: #ffffff;
+}
+
+.typeJob {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+.typeJob > div {
+  border: 1px rgba(22, 14, 128, 0.7607843137) solid;
+  height: 40px;
+  width: 200px;
+  margin: 5px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.typeJob > div p {
+  text-align: center;
+  font-size: 15pt;
+  font-weight: bold;
+}
+.typeJob .typslc {
+  background: rgba(22, 14, 128, 0.7607843137);
+}
+.typeJob .typslc p {
+  color: #ffffff;
+}
+
+.keywords {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  margin: 50px;
+}
+.keywords input {
+  width: 450px;
+  padding: 5px 0px;
+  text-align: center;
+}
+
+.submit {
+  background: rgba(22, 14, 128, 0.7607843137);
+  color: #ffffff;
+  width: 250px;
+  border: 0px;
+  margin: 50px auto;
+  padding: 10px 0px;
+  font-size: 18pt;
+  cursor: pointer;
 }/*# sourceMappingURL=style.css.map */

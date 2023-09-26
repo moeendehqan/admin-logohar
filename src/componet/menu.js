@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom"
 const Menu = (props) =>{
     const navigate = useNavigate()
     const menuList = [
-        {url:'pallet',name:'پالت رنگی'},
+        {url:'pallet',name:'پالت'},
         {url:'vector',name:'وکتور'},
         {url:'font',name:'فونت'},
     ]

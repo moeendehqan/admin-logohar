@@ -92,29 +92,44 @@ html,body,#root{
 
 .pg{
     flex: 1;
-    height: 100%;
-
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .pallet{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
     justify-content: space-around;
-    height: 150px;
-    margin: 20px;
-    .bx{
+    width: 100%;
+    border-bottom: 1px $colorBlue1 solid;
+    padding: 20px 0px;
+    .bxs{
         display: flex;
-        flex-direction: column;
-        height: 100%;
-        align-items: center;
-        justify-content: space-around;
-        margin: 20px;
-        border: 1px $colorBlue2 solid;
-        flex: 1;
+        flex-direction: row;
+        width: 100%;
+        .bx{
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            align-items: center;
+            justify-content: space-around;
+            border: 1px $colorBlue2 solid;
+            flex: 1;
+            margin:  10px 20px;
+        }
     }
 }
 
+.conteiner{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    padding: 20px 0px;
+    border-bottom: 1px $colorBlue1 solid;
+}
 .typeColor{
     width: 100%;
     display: flex;
@@ -135,4 +150,65 @@ html,body,#root{
             font-weight: bold;
         }
     }
+    .typslc{
+        background: $colorBlue2;
+        p{
+            color: $colorWhite1;
+
+        }
+    }
+}
+.typeJob{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    >div{
+        border: 1px $colorBlue2 solid;
+        height: 40px;
+        width: 200px;
+        margin: 5px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        p{
+            text-align: center;
+            font-size: 15pt;
+            font-weight: bold;
+        }
+    }
+    .typslc{
+        background: $colorBlue2;
+        p{
+            color: $colorWhite1;
+
+        }
+    }
+}
+.keywords{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    margin: 50px;
+    input{
+        width: 450px;
+        padding: 5px 0px;
+        text-align: center;
+
+    }
+}
+
+.submit{
+    background: $colorBlue2;
+    color: $colorWhite1;
+    width: 250px;
+    border: 0px;
+    margin: 50px auto;
+    padding: 10px 0px;
+    font-size: 18pt;
+    cursor: pointer;
 }
