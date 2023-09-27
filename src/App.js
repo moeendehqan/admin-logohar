@@ -4,6 +4,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import Login from './layot/login';
 import Desk from './layot/desk';
 import Pallet from './page/pallet';
+import Vector from './page/vector';
+
 function App() {
   return (
     <BrowserRouter>
@@ -11,6 +13,7 @@ function App() {
           <Route path='/' element={<Login/>}></Route>
           <Route path='/desk' element={<Desk/>}>
             <Route path='pallet' element={<Pallet/>}></Route>
+            <Route path='vector' element={<Vector/>}></Route>
 
           </Route>
         </Routes>

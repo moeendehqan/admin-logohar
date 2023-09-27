@@ -40,7 +40,6 @@ const Pallet = () =>{
                 console.log(response.data)
             })
         }
-        
     }
 
     useEffect(getCategory,[])
