@@ -2,6 +2,7 @@ import axios from "axios"
 import { useEffect, useState } from "react"
 import { OnRun } from "../config/OnRun"
 import { getCookie } from "../functions/Cookie"
+import Loader from "../componet/loader"
 
 
 const Vector = () =>{
@@ -36,7 +37,11 @@ const Vector = () =>{
         }else{
             axios.post(OnRun+'/admin/setvector',{id:id,vector:vectorData})
             .then(response=>{
-                console.log(response.data)
+                if(response.data.reply){
+                    alert('افزوده شد')
+                }else{
+                    alert(response.data.msg)
+                }
             })
         }
     }

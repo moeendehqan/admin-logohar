@@ -22,6 +22,39 @@ html,body,#root{
     height: 100%;
 }
 
+.loader{
+    width: 350px;
+    height: 350px;
+    top: calc((100vh - 350px) / 2);
+    position: fixed;
+    z-index: 2;
+    background: rgba(mix($colorBlue1,$colorWhite1,50), 0.95);
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    >div{
+        width: 140px;
+        height: 140px;
+        border:12px $colorBlue2 solid;
+        border-left-color: $colorWhite1;
+        border-radius: 50%;
+        animation: load 2s 0s infinite forwards;
+        animation-timing-function: ease;
+        animation-fill-mode: forwards;
+        @keyframes load {
+            to{
+                transform: rotate(360deg);
+            }
+            
+        }
+
+
+    }
+
+}
+
 .cm-loginBox{
     display: flex;
     flex-direction: column;
@@ -141,10 +174,10 @@ html,body,#root{
         height: 80px;
         width: 150px;
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
         align-items: center;
         justify-content: center;
-        p{
+        >p{
             text-align: center;
             font-size: 15pt;
             font-weight: bold;
@@ -167,17 +200,22 @@ html,body,#root{
     flex-wrap: wrap;
     >div{
         border: 1px $colorBlue2 solid;
-        height: 40px;
+        height: 50px;
         width: 200px;
         margin: 5px;
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
         align-items: center;
         justify-content: center;
         p{
             text-align: center;
             font-size: 15pt;
             font-weight: bold;
+        }
+        .count{
+            >p{
+                font-size: 12pt;
+            }
         }
     }
     .typslc{
@@ -193,7 +231,7 @@ html,body,#root{
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    margin: 50px;
+    margin: 20px;
     input{
         width: 450px;
         padding: 5px 0px;

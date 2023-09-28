@@ -16,6 +16,35 @@ html, body, #root {
   height: 100%;
 }
 
+.loader {
+  width: 350px;
+  height: 350px;
+  top: calc((100vh - 350px) / 2);
+  position: fixed;
+  z-index: 2;
+  background: rgba(195, 191, 245, 0.95);
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+.loader > div {
+  width: 140px;
+  height: 140px;
+  border: 12px rgba(22, 14, 128, 0.7607843137) solid;
+  border-left-color: #ffffff;
+  border-radius: 50%;
+  animation: load 2s 0s infinite forwards;
+  animation-timing-function: ease;
+  animation-fill-mode: forwards;
+}
+@keyframes load {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 .cm-loginBox {
   display: flex;
   flex-direction: column;
@@ -132,11 +161,11 @@ html, body, #root {
   height: 80px;
   width: 150px;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
 }
-.typeColor > div p {
+.typeColor > div > p {
   text-align: center;
   font-size: 15pt;
   font-weight: bold;
@@ -158,11 +187,11 @@ html, body, #root {
 }
 .typeJob > div {
   border: 1px rgba(22, 14, 128, 0.7607843137) solid;
-  height: 40px;
+  height: 50px;
   width: 200px;
   margin: 5px;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
 }
@@ -170,6 +199,9 @@ html, body, #root {
   text-align: center;
   font-size: 15pt;
   font-weight: bold;
+}
+.typeJob > div .count > p {
+  font-size: 12pt;
 }
 .typeJob .typslc {
   background: rgba(22, 14, 128, 0.7607843137);
@@ -183,7 +215,7 @@ html, body, #root {
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  margin: 50px;
+  margin: 20px;
 }
 .keywords input {
   width: 450px;
