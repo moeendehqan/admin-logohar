@@ -1,3 +1,4 @@
+@import "../../node_modules/tabulator-tables/dist/css/tabulator.min.css";
 * {
   margin: 0px;
   padding: 0px;
@@ -79,6 +80,7 @@ html, body, #root {
   height: 100%;
   width: 250px;
   background: rgba(96, 87, 228, 0.7607843137);
+  position: fixed;
 }
 .cm-menu .userBx {
   display: flex;
@@ -110,6 +112,7 @@ html, body, #root {
 
 .pg {
   flex: 1;
+  margin-right: 250px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -232,4 +235,49 @@ html, body, #root {
   padding: 10px 0px;
   font-size: 18pt;
   cursor: pointer;
+}
+
+.conteiner-table {
+  width: 100%;
+}
+.conteiner-table .cntnrClr {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+.conteiner-table .cntnrClr span {
+  height: 20px;
+  width: 20px;
+}
+.conteiner-table .cntnrClr p {
+  flex: 1;
+}
+
+.layoutlogo {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  width: 100%;
+}
+.layoutlogo .controll {
+  flex: 1;
+  height: 100%;
+  background: rgba(166, 101, 103, 0.8803921569);
+  border: 2px rgba(166, 101, 103, 0.8803921569) solid;
+}
+.layoutlogo .controll h6 {
+  font-size: 15pt;
+  color: rgba(22, 14, 128, 0.7607843137);
+  width: 100%;
+  text-align: center;
+  margin: 10px 0px;
+  background: #ffffff;
+  padding: 5px 0px;
+}
+.layoutlogo .visio {
+  flex: 2;
 }/*# sourceMappingURL=style.css.map */
