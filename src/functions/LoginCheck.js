@@ -13,13 +13,13 @@ const LoginCheck = () =>{
         if (id=='undefined') {
             navigate('/')
         }else{
-            axios.post(OnRun+'/admin/checkid',{id:id})
-            .then(response=>{
-                if(!response.data.reply){
+            axios.post(OnRun+'/admin/cookie_check',{id:id})
+                .then(response=>{
+                })
+                .catch(error=>{
                     navigate('/')
                     setCookie('id','',0)
-                }
-            })
+                })
         }
     },[id])
 

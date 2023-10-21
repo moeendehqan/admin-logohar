@@ -13,38 +13,36 @@ const LoginBox = () =>{
     const id = getCookie('id')
 
     const getCaptcha = () =>{
-        axios.post(OnRun+'/getcaptcha')
+        axios.get(OnRun+'/captcha')
         .then(response=>{
-            setInputs({...inputs,captchaImg:response.data.img,captchaCode:response.data.captcha})
-
+            setInputs({...inputs,captchaImg:response.data.image, captchaCode:response.data.encrypted_response})
         })
     }
 
     const handleLogin  = () =>{
         axios.post(OnRun+'/admin/login',{username:inputs.username,password:inputs.password,captchaInp:inputs.captchaInp,captchaCode:inputs.captchaCode})
         .then(response=>{
-            if(response.data.reply){
-                setCookie('id',response.data.id,5)
+                setCookie('id',response.data._id,5)
                 navigate('/desk')
-            }else{
-                toast.warning(response.data.msg)
-            }
+            })
+        .catch(error=>{
+            toast.warning(error.response.data.message)
         })
     }
 
     useEffect(getCaptcha,[])
+
     useEffect(()=>{
-        if (id != 'undefined') {
-            console.log(id)
+        if (id) {
             navigate('/')
-            axios.post(OnRun+'/admin/checkid',{id:id})
-            .then(response=>{
-                if(response.data.reply){
+            axios.post(OnRun+'/admin/cookie_check',{id:id})
+                .then(response=>{
                     navigate('/desk')
-                }else{
+                })
+                .catch(error=>{
+                    toast.warning(error.response.data.message)
                     setCookie('id','',0)
-                }
-            })
+                })
         }
     },[id])
 

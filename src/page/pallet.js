@@ -1,30 +1,28 @@
-import axios from "axios"
 import { useEffect, useState } from "react"
-import { OnRun } from "../config/OnRun"
 import { getCookie } from "../functions/Cookie"
+import { ToastContainer, toast } from 'react-toastify';
 import Loader from "../componet/loader"
 import {TabulatorFull as Tabulator} from 'tabulator-tables';
 import * as hook from '../hook/index' 
+import DelConfirm from "../componet/delConfirm";
 const Pallet = () =>{
     const id = getCookie('id')
+    const [delconState,setDelconStatet]=useState({id:id, enable:false, idItem:'',type:'pallet'})
+    const [palletData,setPalletData] = useState({firstColor:'#000000',secondColor:'#000000',thirdColor:'#000000',typeColor:'warm',typeJob:[],keywords:''})
+    var {data:palletTank, isLoading:isLoadingPalletTank} = hook.useGetPalletTank(id)
+    var {data:colorType, isLoading:isLoadingColorType} = hook.useGetColorType()
+    var {data:category, isLoading:isLoadingCategory} = hook.useGetCategory()
+    const setNewPallet = hook.useSetNewPallet(id, palletData.firstColor, palletData.secondColor, palletData.thirdColor, palletData.typeColor, palletData.typeJob, palletData.keywords);
 
-    const [palletData,setPalletData] = useState({firstColor:'#000',secondColor:'#000',thirdColor:'#000',typeColor:'warm',typeJob:[],keywords:''})
-
-    var {data:statics, isLoading:isLoadingStatics} = hook.useGetStaticPallet(id)
-    var {data:bankPallet, isLoading:isLoadingBankPallet} = hook.useGetBankPalet(id)
-    var {data:Category, isLoading:isLoadingCategory} = hook.useGetCategory()
-
-    const setNewPallet = hook.useSetNewPallet(id, palletData);
-
-    const submit = () =>{
-        if (palletData.firstColor == palletData.secondColor && palletData.thirdColor == palletData.secondColor) {
-            alert('تمام رنگ ها یکسان است')            
-        }else if (palletData.typeColor.length==0) {
-            alert('نوع پالت خالی است')
-        }else if (palletData.typeJob.length==0) {
-            alert('حداقل یک دستبندی صنفی باید انتخاب شود')
-        }else if (palletData.keywords.length==0) {
-            alert('کلیدواژه ها نمیتواند خالی باشد')
+    const submit = (newPallet) =>{
+        if (newPallet.firstColor == newPallet.secondColor && newPallet.thirdColor == newPallet.secondColor) {
+            toast.warning('تمام رنگ ها یکسان است')            
+        }else if (newPallet.typeColor.length==0) {
+            toast.warning('نوع پالت خالی است')
+        }else if (newPallet.typeJob.length==0) {
+            toast.warning('حداقل یک دستبندی صنفی باید انتخاب شود')
+        }else if (newPallet.keywords.length==0) {
+            toast.warning('کلیدواژه ها نمیتواند خالی باشد')
         }else{
             setNewPallet.mutate()
         }
@@ -45,21 +43,20 @@ const Pallet = () =>{
 
     const rowMenu = [
         {
-            label:"کپی",
-            action:function(e, row){
-
-                const rowValue  = row.getData()
-                setPalletData(rowValue)
+            label: "حذف",
+            action: function (e, row) {
+                const idItem = row.getData()['_id'];
+                setDelconStatet({...delconState,idItem:idItem,enable:true})
             }
         }
     ]
 
     
 
-    const handleBankPallet = () =>{
-        if (!isLoadingBankPallet){
+    const handlePalletTank = () =>{
+        if (!isLoadingPalletTank){
             var table = new Tabulator("#data-table", {
-                data:bankPallet.df,
+                data:palletTank,
                 layout:"fitColumns",
                 responsiveLayout:true,
                 columnHeaderSortMulti:true,
@@ -74,46 +71,44 @@ const Pallet = () =>{
                 dataTreeStartExpanded:false,
                 rowContextMenu: rowMenu,
                 columns:[
-                    {title:"id", visible:false, field:"id", hozAlign:'center',headerHozAlign:'center',resizable:true, widthGrow:3,headerFilter:"input"},
-                    {title:"رنگ نخست", field:"firstColor", hozAlign:'center',headerHozAlign:'center',resizable:true, widthGrow:3,headerFilter:"input",
+                    {title:"_id", visible:false, field:"_id", hozAlign:'center',headerHozAlign:'center',resizable:true, widthGrow:3,headerFilter:"input"},
+                    {title:"رنگ نخست", field:"first_color", hozAlign:'center',headerHozAlign:'center',resizable:true, widthGrow:3,headerFilter:"input",
                         formatter:function(cell, formatterParams){
                             var value = cell.getValue();
                             return("<div class='cntnrClr'><p>"+value+"</p><span style='background-color:" + value+ "'></span><div>")
                         },
                     },
-                    {title:"رنگ دوم", field:"secondColor", hozAlign:'center',headerHozAlign:'center',resizable:true, widthGrow:3,headerFilter:"input",
+                    {title:"رنگ دوم", field:"secend_color", hozAlign:'center',headerHozAlign:'center',resizable:true, widthGrow:3,headerFilter:"input",
                         formatter:function(cell, formatterParams){
                             var value = cell.getValue();
                             return("<div class='cntnrClr'><p>"+value+"</p><span style='background-color:" + value+ "'></span><div>")
                         },
                     },
-                    {title:"رنگ سوم", field:"thirdColor", hozAlign:'center',headerHozAlign:'center',resizable:true, widthGrow:3,headerFilter:"input",
+                    {title:"رنگ سوم", field:"third_color", hozAlign:'center',headerHozAlign:'center',resizable:true, widthGrow:3,headerFilter:"input",
                         formatter:function(cell, formatterParams){
                             var value = cell.getValue();
                             return("<div class='cntnrClr'><p>"+value+"</p><span style='background-color:" + value+ "'></span><div>")
                         },
                     },
-                    {title:"typeColor", visible:false, field:"typeColor", hozAlign:'center',headerHozAlign:'center',resizable:true, widthGrow:3,headerFilter:"input"},
-                    {title:"typeJob", visible:false, field:"typeJob", hozAlign:'center',headerHozAlign:'center',resizable:true, widthGrow:3,headerFilter:"input"},
+                    {title:"type_color", visible:false, field:"type_color", hozAlign:'center',headerHozAlign:'center',resizable:true, widthGrow:3,headerFilter:"input"},
+                    {title:"jobs", visible:false, field:"jobs", hozAlign:'center',headerHozAlign:'center',resizable:true, widthGrow:3,headerFilter:"input"},
                     {title:"کلیدواژه ها", field:"keywords", hozAlign:'center',headerHozAlign:'center',resizable:true, widthGrow:3,headerFilter:"input"},
-                    {title:"idCreator", visible:false, field:"idCreator", hozAlign:'center',headerHozAlign:'center',resizable:true, widthGrow:3,headerFilter:"input"},
-                    {title:"نوع رنگ", field:"typeColorName", hozAlign:'center',headerHozAlign:'center',resizable:true, widthGrow:3,headerFilter:"input"},
-                    {title:"رشته های صنفی", field:"typeJobName", hozAlign:'center',headerHozAlign:'center',resizable:true, widthGrow:6,headerFilter:"input"},
-                    {title:"تاریخ ایجاد", field:"createDate", hozAlign:'center',headerHozAlign:'center',resizable:true, widthGrow:3,headerFilter:"input"},
-                    {title:"edith", visible:false, field:"edith", hozAlign:'center',headerHozAlign:'center',resizable:true, widthGrow:3,headerFilter:"input"},
-                    {title:"edithFrom", visible:false, field:"edithFrom", hozAlign:'center',headerHozAlign:'center',resizable:true, widthGrow:3,headerFilter:"input"},
-                    {title:"idEdithor", visible:false, field:"idEdithor", hozAlign:'center',headerHozAlign:'center',resizable:true, widthGrow:3,headerFilter:"input"},
+                    {title:"نوع رنگ", field:"type_color_name", hozAlign:'center',headerHozAlign:'center',resizable:true, widthGrow:3,headerFilter:"input"},
+                    {title:"رشته های صنفی", field:"jobs_name", hozAlign:'center',headerHozAlign:'center',resizable:true, widthGrow:6,headerFilter:"input"},
+                    {title:"تاریخ ایجاد", field:"create_date", hozAlign:'center',headerHozAlign:'center',resizable:true, widthGrow:3,headerFilter:"input"},
                 ]
             })
         }
     }
 
 
-    useEffect(handleBankPallet,[isLoadingBankPallet, setNewPallet.isLoading])
+    useEffect(handlePalletTank,[isLoadingPalletTank, setNewPallet.isLoading])
 
     return(
         <div className="pg">
+            <ToastContainer autoClose={3000} />
             <Loader loading={setNewPallet.isLoading} />
+            <DelConfirm delconState={delconState} setDelconStatet={setDelconStatet}/>
             <div className="pallet">
                 <h4>انتخاب رنگ ها</h4>
                 <div className="bxs">
@@ -138,13 +133,13 @@ const Pallet = () =>{
                 <h4>نوع پالت</h4>
                 <div className="typeColor">
                     {
-                        isLoadingCategory ? null :
-                        Category.colorType.map(i => {
+                        isLoadingColorType ? null :
+                        colorType.map(i => {
                             return(
                                 <div className={palletData.typeColor==i.name?'typslc':''} key={i.name} onClick={()=>setPalletData({...palletData,typeColor:i.name})}>
                                     <p>{i.title}</p>
                                     <div className="count">
-                                        {isLoadingStatics?null:<p>{Object.keys(statics.typeColor).includes(i.name)?statics.typeColor[i.name]:0}</p>}
+                                        {/*isLoadingStatics?null:<p>{Object.keys(statics.typeColor).includes(i.name)?statics.typeColor[i.name]:0}</p>*/}
                                     </div>
                                 </div>
                             )
@@ -152,17 +147,18 @@ const Pallet = () =>{
                     }
                 </div>
             </div>
+
             <div className="conteiner">
                 <h4>دسته صنفی</h4>
                 <div className="typeJob">
                     {
                         isLoadingCategory ? null :
-                        Category.jobType.map(i => {
+                        category.map(i => {
                             return(
                                 <div className={palletData.typeJob.includes(i.name)?'typslc':''} key={i.name} onClick={()=>handleTpye(i.name)}>
                                     <p>{i.title}</p>
                                     <div className="count">
-                                        {isLoadingStatics?null:<p>{Object.keys(statics.typeJob).includes(i.name)?statics.typeJob[i.name]:0}</p>}
+                                        {/*isLoadingStatics?null:<p>{Object.keys(statics.typeJob).includes(i.name)?statics.typeJob[i.name]:0}</p>*/}
                                     </div>
                                 </div>
                             )
@@ -177,7 +173,7 @@ const Pallet = () =>{
                 </div>
                 <p>هر کلید واژه را با - از هم جدا کنید</p>
             </div>
-            <button onClick={submit} className="submit">ثبت</button>
+            <button onClick={()=>submit(palletData)} className="submit">ثبت</button>
             <div className="conteiner-table">
                 <div id="data-table"></div>
             </div>

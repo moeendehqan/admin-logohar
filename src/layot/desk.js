@@ -11,10 +11,10 @@ const Desk = () =>{
     const id = getCookie('id')
 
     const getInfoUser = () =>{
-        axios.post(OnRun+'/admin/getinfouser',{id:id})
+        axios.post(OnRun+'/admin/cookie_check',{id:id})
         .then(response=>{
-            if (response.data.reply) {
-                setInfoUser(response.data.infouser)
+            if (response.data) {
+                setInfoUser(response.data)
             }
         })
     }

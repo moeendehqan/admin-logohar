@@ -1,5 +1,6 @@
 import { useQueryClient, useMutation, useQuery } from "react-query";
 import * as api from '../api/index'
+import { ToastContainer, toast } from 'react-toastify';
 
 
 export const useGetStaticPallet = (id) =>{
@@ -7,30 +8,119 @@ export const useGetStaticPallet = (id) =>{
 }
 
 
+export const useGetColorType = () =>{
+    return useQuery('colorType', api.getColorType)
+}
+
 export const useGetCategory = () =>{
-    return useQuery('category', ()=>api.getCategory())
+    return useQuery('category', api.getCategory)
 }
 
-export const useGetBankPalet = (id) =>{
-    return useQuery(['bankPallet',id], api.getBankPallet)
-}
-
-export const useSetNewPallet = (id, pallet) =>{
-    const queryClient = useQueryClient();
-    return useMutation(()=>api.setNewPallet(id, pallet),{
-        onSuccess: async () => {
-            await queryClient.refetchQueries(['bankPallet', id]);
-            await queryClient.refetchQueries(['staticPallet', id]);
-        },
+export const useGetPalletTank = (id) =>{
+    return useQuery(['palletTank',id], api.getPalletTank,{
+        onError: (error=>{
+            if (error.response.status==403) {
+                toast.warning(error.response.data.message)
+            }
+        })
     })
 }
 
-export const useSetNewVector = (id, vector) =>{
+export const useSetNewPallet = (id, firstColor, secondColor, thirdColor, typeColor, jobs, keywords) =>{
     const queryClient = useQueryClient();
-    return useMutation(()=>api.setNewVector(id, vector),{
+    return useMutation(()=>api.setNewPallet(id, firstColor, secondColor, thirdColor, typeColor, jobs, keywords),{
         onSuccess: async () => {
-            /* این ریفتچ باید تغییر کند */
-            await queryClient.refetchQueries(['bankPallet', id]);
+            await queryClient.refetchQueries(['palletTank', id]);
+            await queryClient.refetchQueries(['staticPallet', id]);
+            toast.success('ثبت شد')
+
         },
+        onError: (error=>{
+            toast.warning(error.response.data.message)
+        })
+    })
+}
+
+export const useGetVectorTank = (id) =>{
+    return useQuery(['vectorTank',id], api.getVectorTank)
+}
+
+export const useSetNewVector = (id, file, jobs, keywords) =>{
+    const queryClient = useQueryClient();
+    return useMutation(()=>api.setNewVector(id, file, jobs, keywords),{
+        onSuccess: async () => {
+            await queryClient.refetchQueries(['vectorTank', id]);
+            toast.success('ثبت شد')
+        },
+        onError: (error=>{
+            toast.warning(error.response.data.message)
+        })
+
+    })
+}
+
+export const useGetFontTank = (id) =>{
+    return useQuery(['fontTank',id],api.getFontTank,{
+        onSuccess: async () => {
+            toast.success('مخزن بروز شد')
+        },
+        onError: (error=>{
+            toast.warning(error.response.data.message)
+        })
+    })
+}
+
+
+export const useSetNewFont = (id, file, name, weight, typeJob) =>{
+    const queryClient = useQueryClient();
+    return useMutation(()=>api.setNewFont(id, file, name, weight, typeJob),{
+        onSuccess: async () => {
+            await queryClient.refetchQueries(['fontsName', id]);
+            await queryClient.refetchQueries(['fontTank', id]);
+            toast.success('ثبت شد')
+        },
+        onError: (error=>{
+            toast.warning(error.response.data.message)
+        })
+    })
+}
+
+
+export const useDelPallet = (id, idPallet) =>{
+    const queryClient = useQueryClient();
+    return useMutation(()=>api.delPallet(id, idPallet),{
+        onSuccess: async () =>{
+            await queryClient.refetchQueries(['palletTank', id]);
+            toast.success('حذف شد')
+        },
+        onError: (error=>{
+            toast.warning(error.response.data.message)
+        })
+    })
+}
+
+export const useDelVector = (id, idVector) =>{
+    const queryClient = useQueryClient();
+    return useMutation(()=>api.delVector(id, idVector),{
+        onSuccess: async () =>{
+            await queryClient.refetchQueries(['vectorTank', id]);
+            toast.success('حذف شد')
+        },
+        onError: (error=>{
+            toast.warning(error.response.data.message)
+        })
+    })
+}
+
+export const useDelFont = (id, idFont) =>{
+    const queryClient = useQueryClient();
+    return useMutation(()=>api.delFont(id, idFont),{
+        onSuccess: async () =>{
+            await queryClient.refetchQueries(['fontTank', id]);
+            toast.success('حذف شد')
+        },
+        onError: (error=>{
+            toast.warning(error.response.data.message)
+        })
     })
 }
