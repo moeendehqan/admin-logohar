@@ -13,8 +13,8 @@ export const getColorType = async (payload) =>{
     return data
 }
 
-export const getCategory = async (payload) =>{
-    const {data} = await client.get('/admin/category')
+export const getJobs = async (payload) =>{
+    const {data} = await client.get('/admin/jobs')
     return data
 }
 
@@ -73,7 +73,6 @@ export const getFontTank = async (payload) =>{
 
 
 export const delPallet = async (id, idPallet) =>{
-    console.log(idPallet)
     const {data} = await client.delete('/admin/pallet',{data:{id:id, id_pallet:idPallet}})
     return data
 }

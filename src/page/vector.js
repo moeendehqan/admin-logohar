@@ -13,7 +13,7 @@ const Vector = () =>{
 
     const [delconState,setDelconStatet]=useState({id:id, enable:false, idItem:'',type:'vector'})
 
-    var {data:category, isLoading:isLoadingCategory} = hook.useGetCategory()
+    var {data:jobs, isLoading:isLoadingJobs} = hook.useGetJobs()
     var {data:vectorTank, isLoading:isLoadingVectorTank} = hook.useGetVectorTank(id)
 
 
@@ -31,7 +31,6 @@ const Vector = () =>{
 
     const handleVectorTank = () =>{
         if (!isLoadingVectorTank){
-            console.log(vectorTank)
             var table = new Tabulator("#data-table", {
                 data:vectorTank,
                 layout:"fitColumns",
@@ -57,10 +56,22 @@ const Vector = () =>{
                     },
                     {title:"نام فایل", field:"file_name", hozAlign:'center',headerHozAlign:'center',resizable:true, widthGrow:3,headerFilter:"input",},
                     {title:"فرمت", field:"file_type", hozAlign:'center',headerHozAlign:'center',resizable:true, widthGrow:3,headerFilter:"input",},
-                    {title:"ابعاد تصویر", field:"aspect_ratio", hozAlign:'center',headerHozAlign:'center',resizable:true, widthGrow:3,headerFilter:"input",},
+                    {title:"نسبت تصویر", field:"aspect_ratio_file", hozAlign:'center',headerHozAlign:'center',resizable:true, widthGrow:3,headerFilter:"input",
+                        formatter:function(cell, formatterParams){
+                            var value = cell.getValue();
+
+                            return ('<p>'+Math.floor(value*100)/100+':1</p>')
+                        },
+                    },
+                    {title:"نسبت محتوا", field:"aspect_ratio_content", hozAlign:'center',headerHozAlign:'center',resizable:true, widthGrow:3,headerFilter:"input",
+                        formatter:function(cell, formatterParams){
+                            var value = cell.getValue();
+
+                            return ('<p>'+Math.floor(value*100)/100+':1</p>')
+                        },
+                    },
                     {title:"typeJob", visible:false, field:"typeJob", hozAlign:'center',headerHozAlign:'center',resizable:true, widthGrow:3,headerFilter:"input"},
                     {title:"کلیدواژه ها", field:"keywords", hozAlign:'center',headerHozAlign:'center',resizable:true, widthGrow:3,headerFilter:"input"},
-                    {title:"idCreator", visible:false, field:"idCreator", hozAlign:'center',headerHozAlign:'center',resizable:true, widthGrow:3,headerFilter:"input"},
                     {title:"رشته های صنفی", field:"jobs_name", hozAlign:'center',headerHozAlign:'center',resizable:true, widthGrow:6,headerFilter:"input"},
                     {title:"تاریخ ایجاد", field:"create_date", hozAlign:'center',headerHozAlign:'center',resizable:true, widthGrow:3,headerFilter:"input"},
                 ]
@@ -113,8 +124,8 @@ const Vector = () =>{
                 <h4>دسته صنفی</h4>
                 <div className="typeJob">
                     {
-                        isLoadingCategory?null:
-                        category.map(i=>{
+                        isLoadingJobs?null:
+                        jobs.map(i=>{
                             return(
                                 <div className={vectorData.typeJob.includes(i.name)?'typslc':''} key={i.name} onClick={()=>handleTpye(i.name)}>
                                     <p>{i.title}</p>

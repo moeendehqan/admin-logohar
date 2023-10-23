@@ -10,7 +10,7 @@ const Font = () =>{
     const [delconState,setDelconStatet]=useState({id:id, enable:false, idItem:'',type:'font'})
     const [font, setFont] = useState({file:null, name:'', weight:'Regular', typeJob:[],id:''})
     const [distancNameFontTank , setDistancNameFontTank] = useState([])
-    var {data:category, isLoading:isLoadingCategory} = hook.useGetCategory()
+    var {data:jobs, isLoading:isLoadingJobs} = hook.useGetJobs()
     var {data:fontTank, isLoading:isLoadingFontTank} = hook.useGetFontTank(id)
     const setNewFont = hook.useSetNewFont(id, font.file, font.name, font.weight, font.typeJob)
     
@@ -122,8 +122,8 @@ const Font = () =>{
                 <h4>دسته صنفی</h4>
                 <div className="typeJob">
                     {
-                        isLoadingCategory?null:
-                        category.map(i=>{
+                        isLoadingJobs?null:
+                        jobs.map(i=>{
                             return(
                                 <div className={font.typeJob.includes(i.name)?'typslc':''} key={i.name} onClick={()=>handleTpye(i.name)}>
                                     <p>{i.title}</p>

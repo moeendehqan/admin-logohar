@@ -11,7 +11,7 @@ const Pallet = () =>{
     const [palletData,setPalletData] = useState({firstColor:'#000000',secondColor:'#000000',thirdColor:'#000000',typeColor:'warm',typeJob:[],keywords:''})
     var {data:palletTank, isLoading:isLoadingPalletTank} = hook.useGetPalletTank(id)
     var {data:colorType, isLoading:isLoadingColorType} = hook.useGetColorType()
-    var {data:category, isLoading:isLoadingCategory} = hook.useGetCategory()
+    var {data:jobs, isLoading:isLoadingJobs} = hook.useGetJobs()
     const setNewPallet = hook.useSetNewPallet(id, palletData.firstColor, palletData.secondColor, palletData.thirdColor, palletData.typeColor, palletData.typeJob, palletData.keywords);
 
     const submit = (newPallet) =>{
@@ -152,8 +152,8 @@ const Pallet = () =>{
                 <h4>دسته صنفی</h4>
                 <div className="typeJob">
                     {
-                        isLoadingCategory ? null :
-                        category.map(i => {
+                        isLoadingJobs ? null :
+                        jobs.map(i => {
                             return(
                                 <div className={palletData.typeJob.includes(i.name)?'typslc':''} key={i.name} onClick={()=>handleTpye(i.name)}>
                                     <p>{i.title}</p>

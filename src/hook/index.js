@@ -12,8 +12,8 @@ export const useGetColorType = () =>{
     return useQuery('colorType', api.getColorType)
 }
 
-export const useGetCategory = () =>{
-    return useQuery('category', api.getCategory)
+export const useGetJobs = () =>{
+    return useQuery('jobs', api.getJobs)
 }
 
 export const useGetPalletTank = (id) =>{
