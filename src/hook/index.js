@@ -16,6 +16,10 @@ export const useGetJobs = () =>{
     return useQuery('jobs', api.getJobs)
 }
 
+export const useGetClass = () =>{
+    return useQuery('logoClas', api.getLogoClass)
+}
+
 export const useGetPalletTank = (id) =>{
     return useQuery(['palletTank',id], api.getPalletTank,{
         onError: (error=>{
@@ -26,9 +30,9 @@ export const useGetPalletTank = (id) =>{
     })
 }
 
-export const useSetNewPallet = (id, firstColor, secondColor, thirdColor, typeColor, jobs, keywords) =>{
+export const useSetNewPallet = (id, firstColor, secondColor, thirdColor, typeColor, jobs, keywords, logoClass) =>{
     const queryClient = useQueryClient();
-    return useMutation(()=>api.setNewPallet(id, firstColor, secondColor, thirdColor, typeColor, jobs, keywords),{
+    return useMutation(()=>api.setNewPallet(id, firstColor, secondColor, thirdColor, typeColor, jobs, keywords, logoClass),{
         onSuccess: async () => {
             await queryClient.refetchQueries(['palletTank', id]);
             await queryClient.refetchQueries(['staticPallet', id]);
@@ -45,9 +49,9 @@ export const useGetVectorTank = (id) =>{
     return useQuery(['vectorTank',id], api.getVectorTank)
 }
 
-export const useSetNewVector = (id, file, jobs, keywords) =>{
+export const useSetNewVector = (id, file, jobs, keywords, logoClass) =>{
     const queryClient = useQueryClient();
-    return useMutation(()=>api.setNewVector(id, file, jobs, keywords),{
+    return useMutation(()=>api.setNewVector(id, file, jobs, keywords, logoClass),{
         onSuccess: async () => {
             await queryClient.refetchQueries(['vectorTank', id]);
             toast.success('ثبت شد')
@@ -71,9 +75,9 @@ export const useGetFontTank = (id) =>{
 }
 
 
-export const useSetNewFont = (id, file, name, weight, typeJob) =>{
+export const useSetNewFont = (id, file, name, weight, typeJob, logoClass) =>{
     const queryClient = useQueryClient();
-    return useMutation(()=>api.setNewFont(id, file, name, weight, typeJob),{
+    return useMutation(()=>api.setNewFont(id, file, name, weight, typeJob, logoClass),{
         onSuccess: async () => {
             await queryClient.refetchQueries(['fontsName', id]);
             await queryClient.refetchQueries(['fontTank', id]);

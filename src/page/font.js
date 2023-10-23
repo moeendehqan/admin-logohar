@@ -8,11 +8,12 @@ import DelConfirm from "../componet/delConfirm";
 const Font = () =>{
     const id = getCookie('id')
     const [delconState,setDelconStatet]=useState({id:id, enable:false, idItem:'',type:'font'})
-    const [font, setFont] = useState({file:null, name:'', weight:'Regular', typeJob:[],id:''})
+    const [font, setFont] = useState({file:null, name:'', weight:'Regular', typeJob:[],id:'',logoClass:[]})
     const [distancNameFontTank , setDistancNameFontTank] = useState([])
     var {data:jobs, isLoading:isLoadingJobs} = hook.useGetJobs()
     var {data:fontTank, isLoading:isLoadingFontTank} = hook.useGetFontTank(id)
-    const setNewFont = hook.useSetNewFont(id, font.file, font.name, font.weight, font.typeJob)
+    var {data:logoClass, isLoading:isLoadingLogoClass} = hook.useGetClass()
+    const setNewFont = hook.useSetNewFont(id, font.file, font.name, font.weight, font.typeJob, font.logoClass)
     
 
 
@@ -25,6 +26,17 @@ const Font = () =>{
             setFont({...font,typeJob:typJobNew})
         }
     }
+
+    const handleLogoClass = (typ) =>{
+        if (font.logoClass.includes(typ)) {
+            const logoClassNew = font.logoClass.filter(i => i!=typ)
+            setFont({...font,logoClass:logoClassNew})
+        }else{
+            const logoClassNew = font.logoClass.concat([typ])
+            setFont({...font,logoClass:logoClassNew})
+        }
+    }
+
 
     const submit = () =>{
         if (font.name.length==0) {alert('نام فونت خالی است')
@@ -72,6 +84,7 @@ const Font = () =>{
                     {title:"وزن", field:"weight", hozAlign:'center',headerHozAlign:'center',resizable:true, widthGrow:3,headerFilter:"input",},
                     {title:"نام فایل", field:"file_name", hozAlign:'center',headerHozAlign:'center',resizable:true, widthGrow:3,headerFilter:"input"},
                     {title:"رشته های صنفی", field:"jobs_name", hozAlign:'center',headerHozAlign:'center',resizable:true, widthGrow:6,headerFilter:"input"},
+                    {title:"نوع لوگو", field:"logo_class_name", hozAlign:'center',headerHozAlign:'center',resizable:true, widthGrow:6,headerFilter:"input"},
                     {title:"تاریخ ایجاد", field:"create_date", hozAlign:'center',headerHozAlign:'center',resizable:true, widthGrow:3,headerFilter:"input"},
                 ]
             })
@@ -132,6 +145,21 @@ const Font = () =>{
                         })
                         
                     }
+                </div>
+            </div>
+            <div className="conteiner">
+                <h4>نوع لوگو</h4>
+                <div className="typeJob">
+                {
+                    isLoadingLogoClass?null:
+                    logoClass.map(i=>{
+                        return(
+                            <div className={font.logoClass.includes(i.name)?'typslc':''} key={i.name} onClick={()=>handleLogoClass(i.name)}>
+                                <p>{i.title}</p>
+                            </div>
+                        )
+                    })
+                }
                 </div>
             </div>
             <button onClick={submit} className="submit">ثبت</button>

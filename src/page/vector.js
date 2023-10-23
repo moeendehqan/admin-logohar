@@ -10,11 +10,12 @@ import DelConfirm from "../componet/delConfirm";
 const Vector = () =>{
 
     const id = getCookie('id')
-
+    const [vectorData, setVectorData] = useState({file:null,typeJob:[],keywords:'',logoClass:[]})
     const [delconState,setDelconStatet]=useState({id:id, enable:false, idItem:'',type:'vector'})
 
     var {data:jobs, isLoading:isLoadingJobs} = hook.useGetJobs()
     var {data:vectorTank, isLoading:isLoadingVectorTank} = hook.useGetVectorTank(id)
+    var {data:logoClass, isLoading:isLoadingLogoClass} = hook.useGetClass()
 
 
     
@@ -73,6 +74,7 @@ const Vector = () =>{
                     {title:"typeJob", visible:false, field:"typeJob", hozAlign:'center',headerHozAlign:'center',resizable:true, widthGrow:3,headerFilter:"input"},
                     {title:"کلیدواژه ها", field:"keywords", hozAlign:'center',headerHozAlign:'center',resizable:true, widthGrow:3,headerFilter:"input"},
                     {title:"رشته های صنفی", field:"jobs_name", hozAlign:'center',headerHozAlign:'center',resizable:true, widthGrow:6,headerFilter:"input"},
+                    {title:"نوع لوگو", field:"logo_class_name", hozAlign:'center',headerHozAlign:'center',resizable:true, widthGrow:6,headerFilter:"input"},
                     {title:"تاریخ ایجاد", field:"create_date", hozAlign:'center',headerHozAlign:'center',resizable:true, widthGrow:3,headerFilter:"input"},
                 ]
             })
@@ -80,8 +82,7 @@ const Vector = () =>{
     }
 
     
-    const [vectorData, setVectorData] = useState({file:null,typeJob:[],keywords:''})
-    const setNewVector = hook.useSetNewVector(id, vectorData.file, vectorData.typeJob, vectorData.keywords)
+    const setNewVector = hook.useSetNewVector(id, vectorData.file, vectorData.typeJob, vectorData.keywords, vectorData.logoClass)
 
     
 
@@ -93,6 +94,16 @@ const Vector = () =>{
         }else{
             const typJobNew = vectorData.typeJob.concat([typ])
             setVectorData({...vectorData,typeJob:typJobNew})
+        }
+    }
+
+    const handleLogoClass = (typ) =>{
+        if (vectorData.logoClass.includes(typ)) {
+            const logoClassNew = vectorData.logoClass.filter(i => i!=typ)
+            setVectorData({...vectorData,logoClass:logoClassNew})
+        }else{
+            const logoClassNew = vectorData.logoClass.concat([typ])
+            setVectorData({...vectorData,logoClass:logoClassNew})
         }
     }
 
@@ -133,6 +144,21 @@ const Vector = () =>{
                             )
                         })
                     }
+                </div>
+            </div>
+            <div className="conteiner">
+                <h4>نوع لوگو</h4>
+                <div className="typeJob">
+                {
+                    isLoadingLogoClass?null:
+                    logoClass.map(i=>{
+                        return(
+                            <div className={vectorData.logoClass.includes(i.name)?'typslc':''} key={i.name} onClick={()=>handleLogoClass(i.name)}>
+                                <p>{i.title}</p>
+                            </div>
+                        )
+                    })
+                }
                 </div>
             </div>
             <div className="conteiner">

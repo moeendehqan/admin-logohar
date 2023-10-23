@@ -5,14 +5,16 @@ import Loader from "../componet/loader"
 import {TabulatorFull as Tabulator} from 'tabulator-tables';
 import * as hook from '../hook/index' 
 import DelConfirm from "../componet/delConfirm";
+
 const Pallet = () =>{
     const id = getCookie('id')
     const [delconState,setDelconStatet]=useState({id:id, enable:false, idItem:'',type:'pallet'})
-    const [palletData,setPalletData] = useState({firstColor:'#000000',secondColor:'#000000',thirdColor:'#000000',typeColor:'warm',typeJob:[],keywords:''})
+    const [palletData,setPalletData] = useState({firstColor:'#000000',secondColor:'#000000',thirdColor:'#000000',typeColor:'warm',typeJob:[],keywords:'',logoClass:[]})
     var {data:palletTank, isLoading:isLoadingPalletTank} = hook.useGetPalletTank(id)
     var {data:colorType, isLoading:isLoadingColorType} = hook.useGetColorType()
     var {data:jobs, isLoading:isLoadingJobs} = hook.useGetJobs()
-    const setNewPallet = hook.useSetNewPallet(id, palletData.firstColor, palletData.secondColor, palletData.thirdColor, palletData.typeColor, palletData.typeJob, palletData.keywords);
+    var {data:logoClass, isLoading:isLoadingLogoClass} = hook.useGetClass()
+    const setNewPallet = hook.useSetNewPallet(id, palletData.firstColor, palletData.secondColor, palletData.thirdColor, palletData.typeColor, palletData.typeJob, palletData.keywords, palletData.logoClass);
 
     const submit = (newPallet) =>{
         if (newPallet.firstColor == newPallet.secondColor && newPallet.thirdColor == newPallet.secondColor) {
@@ -39,7 +41,15 @@ const Pallet = () =>{
     }
 
 
-
+    const handleLogoClass = (typ) =>{
+        if (palletData.logoClass.includes(typ)) {
+            const logoClassNew = palletData.logoClass.filter(i => i!=typ)
+            setPalletData({...palletData,logoClass:logoClassNew})
+        }else{
+            const logoClassNew = palletData.logoClass.concat([typ])
+            setPalletData({...palletData,logoClass:logoClassNew})
+        }
+    }
 
     const rowMenu = [
         {
@@ -95,6 +105,7 @@ const Pallet = () =>{
                     {title:"کلیدواژه ها", field:"keywords", hozAlign:'center',headerHozAlign:'center',resizable:true, widthGrow:3,headerFilter:"input"},
                     {title:"نوع رنگ", field:"type_color_name", hozAlign:'center',headerHozAlign:'center',resizable:true, widthGrow:3,headerFilter:"input"},
                     {title:"رشته های صنفی", field:"jobs_name", hozAlign:'center',headerHozAlign:'center',resizable:true, widthGrow:6,headerFilter:"input"},
+                    {title:"نوع لوگو", field:"logo_class_name", hozAlign:'center',headerHozAlign:'center',resizable:true, widthGrow:6,headerFilter:"input"},
                     {title:"تاریخ ایجاد", field:"create_date", hozAlign:'center',headerHozAlign:'center',resizable:true, widthGrow:3,headerFilter:"input"},
                 ]
             })
@@ -139,7 +150,6 @@ const Pallet = () =>{
                                 <div className={palletData.typeColor==i.name?'typslc':''} key={i.name} onClick={()=>setPalletData({...palletData,typeColor:i.name})}>
                                     <p>{i.title}</p>
                                     <div className="count">
-                                        {/*isLoadingStatics?null:<p>{Object.keys(statics.typeColor).includes(i.name)?statics.typeColor[i.name]:0}</p>*/}
                                     </div>
                                 </div>
                             )
@@ -158,12 +168,26 @@ const Pallet = () =>{
                                 <div className={palletData.typeJob.includes(i.name)?'typslc':''} key={i.name} onClick={()=>handleTpye(i.name)}>
                                     <p>{i.title}</p>
                                     <div className="count">
-                                        {/*isLoadingStatics?null:<p>{Object.keys(statics.typeJob).includes(i.name)?statics.typeJob[i.name]:0}</p>*/}
                                     </div>
                                 </div>
                             )
                         })
                     }
+                </div>
+            </div>
+            <div className="conteiner">
+                <h4>نوع لوگو</h4>
+                <div className="typeJob">
+                {
+                    isLoadingLogoClass?null:
+                    logoClass.map(i=>{
+                        return(
+                            <div className={palletData.logoClass.includes(i.name)?'typslc':''} key={i.name} onClick={()=>handleLogoClass(i.name)}>
+                                <p>{i.title}</p>
+                            </div>
+                        )
+                    })
+                }
                 </div>
             </div>
             <div className="conteiner">
