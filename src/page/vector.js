@@ -55,27 +55,27 @@ const Vector = () =>{
                             return ('<div class="cntrcvgTbl">'+value+'</div>')
                         },
                     },
-                    {title:"نام فایل", field:"file_name", hozAlign:'center',headerHozAlign:'center',resizable:true, widthGrow:3,headerFilter:"input",},
-                    {title:"فرمت", field:"file_type", hozAlign:'center',headerHozAlign:'center',resizable:true, widthGrow:3,headerFilter:"input",},
-                    {title:"نسبت تصویر", field:"aspect_ratio_file", hozAlign:'center',headerHozAlign:'center',resizable:true, widthGrow:3,headerFilter:"input",
+                    {title:"نام فایل", field:"file_name", hozAlign:'center',headerHozAlign:'center',resizable:true, widthGrow:3,headerFilter:"input",topCalc:"count",},
+                    {title:"فرمت", field:"file_type", hozAlign:'center',headerHozAlign:'center',resizable:true, widthGrow:3,headerFilter:"input",topCalc:"count",},
+                    {title:"نسبت تصویر", field:"aspect_ratio_file", hozAlign:'center',headerHozAlign:'center',resizable:true, widthGrow:3,headerFilter:"input",topCalc:"count",
                         formatter:function(cell, formatterParams){
                             var value = cell.getValue();
 
                             return ('<p>'+Math.floor(value*100)/100+':1</p>')
                         },
                     },
-                    {title:"نسبت محتوا", field:"aspect_ratio_content", hozAlign:'center',headerHozAlign:'center',resizable:true, widthGrow:3,headerFilter:"input",
+                    {title:"نسبت محتوا", field:"aspect_ratio_content", hozAlign:'center',headerHozAlign:'center',resizable:true, widthGrow:3,headerFilter:"input",topCalc:"count",
                         formatter:function(cell, formatterParams){
                             var value = cell.getValue();
 
                             return ('<p>'+Math.floor(value*100)/100+':1</p>')
                         },
                     },
-                    {title:"typeJob", visible:false, field:"typeJob", hozAlign:'center',headerHozAlign:'center',resizable:true, widthGrow:3,headerFilter:"input"},
-                    {title:"کلیدواژه ها", field:"keywords", hozAlign:'center',headerHozAlign:'center',resizable:true, widthGrow:3,headerFilter:"input"},
-                    {title:"رشته های صنفی", field:"jobs_name", hozAlign:'center',headerHozAlign:'center',resizable:true, widthGrow:6,headerFilter:"input"},
-                    {title:"نوع لوگو", field:"logo_class_name", hozAlign:'center',headerHozAlign:'center',resizable:true, widthGrow:6,headerFilter:"input"},
-                    {title:"تاریخ ایجاد", field:"create_date", hozAlign:'center',headerHozAlign:'center',resizable:true, widthGrow:3,headerFilter:"input"},
+                    {title:"typeJob", visible:false, field:"typeJob", hozAlign:'center',headerHozAlign:'center',resizable:true, widthGrow:3,headerFilter:"input",topCalc:"count"},
+                    {title:"کلیدواژه ها", field:"keywords", hozAlign:'center',headerHozAlign:'center',resizable:true, widthGrow:3,headerFilter:"input",topCalc:"count"},
+                    {title:"رشته های صنفی", field:"jobs_name", hozAlign:'center',headerHozAlign:'center',resizable:true, widthGrow:6,headerFilter:"input",topCalc:"count"},
+                    {title:"نوع لوگو", field:"logo_class_name", hozAlign:'center',headerHozAlign:'center',resizable:true, widthGrow:6,headerFilter:"input",topCalc:"count"},
+                    {title:"تاریخ ایجاد", field:"create_date", hozAlign:'center',headerHozAlign:'center',resizable:true, widthGrow:3,headerFilter:"input",topCalc:"count"},
                 ]
             })
         }

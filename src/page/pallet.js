@@ -82,31 +82,31 @@ const Pallet = () =>{
                 rowContextMenu: rowMenu,
                 columns:[
                     {title:"_id", visible:false, field:"_id", hozAlign:'center',headerHozAlign:'center',resizable:true, widthGrow:3,headerFilter:"input"},
-                    {title:"رنگ نخست", field:"first_color", hozAlign:'center',headerHozAlign:'center',resizable:true, widthGrow:3,headerFilter:"input",
+                    {title:"رنگ نخست", field:"first_color", hozAlign:'center',headerHozAlign:'center',resizable:true, widthGrow:3,headerFilter:"input",topCalc:"count",
                         formatter:function(cell, formatterParams){
                             var value = cell.getValue();
                             return("<div class='cntnrClr'><p>"+value+"</p><span style='background-color:" + value+ "'></span><div>")
                         },
                     },
-                    {title:"رنگ دوم", field:"secend_color", hozAlign:'center',headerHozAlign:'center',resizable:true, widthGrow:3,headerFilter:"input",
+                    {title:"رنگ دوم", field:"secend_color", hozAlign:'center',headerHozAlign:'center',resizable:true, widthGrow:3,headerFilter:"input",topCalc:"count",
                         formatter:function(cell, formatterParams){
                             var value = cell.getValue();
                             return("<div class='cntnrClr'><p>"+value+"</p><span style='background-color:" + value+ "'></span><div>")
                         },
                     },
-                    {title:"رنگ سوم", field:"third_color", hozAlign:'center',headerHozAlign:'center',resizable:true, widthGrow:3,headerFilter:"input",
+                    {title:"رنگ سوم", field:"third_color", hozAlign:'center',headerHozAlign:'center',resizable:true, widthGrow:3,headerFilter:"input",topCalc:"count",
                         formatter:function(cell, formatterParams){
                             var value = cell.getValue();
                             return("<div class='cntnrClr'><p>"+value+"</p><span style='background-color:" + value+ "'></span><div>")
                         },
                     },
-                    {title:"type_color", visible:false, field:"type_color", hozAlign:'center',headerHozAlign:'center',resizable:true, widthGrow:3,headerFilter:"input"},
-                    {title:"jobs", visible:false, field:"jobs", hozAlign:'center',headerHozAlign:'center',resizable:true, widthGrow:3,headerFilter:"input"},
-                    {title:"کلیدواژه ها", field:"keywords", hozAlign:'center',headerHozAlign:'center',resizable:true, widthGrow:3,headerFilter:"input"},
-                    {title:"نوع رنگ", field:"type_color_name", hozAlign:'center',headerHozAlign:'center',resizable:true, widthGrow:3,headerFilter:"input"},
-                    {title:"رشته های صنفی", field:"jobs_name", hozAlign:'center',headerHozAlign:'center',resizable:true, widthGrow:6,headerFilter:"input"},
-                    {title:"نوع لوگو", field:"logo_class_name", hozAlign:'center',headerHozAlign:'center',resizable:true, widthGrow:6,headerFilter:"input"},
-                    {title:"تاریخ ایجاد", field:"create_date", hozAlign:'center',headerHozAlign:'center',resizable:true, widthGrow:3,headerFilter:"input"},
+                    {title:"type_color", visible:false, field:"type_color", hozAlign:'center',headerHozAlign:'center',resizable:true, widthGrow:3,headerFilter:"input",topCalc:"count"},
+                    {title:"jobs", visible:false, field:"jobs", hozAlign:'center',headerHozAlign:'center',resizable:true, widthGrow:3,headerFilter:"input",topCalc:"count"},
+                    {title:"کلیدواژه ها", field:"keywords", hozAlign:'center',headerHozAlign:'center',resizable:true, widthGrow:3,headerFilter:"input",topCalc:"count"},
+                    {title:"نوع رنگ", field:"type_color_name", hozAlign:'center',headerHozAlign:'center',resizable:true, widthGrow:3,headerFilter:"input",topCalc:"count"},
+                    {title:"رشته های صنفی", field:"jobs_name", hozAlign:'center',headerHozAlign:'center',resizable:true, widthGrow:6,headerFilter:"input",topCalc:"count"},
+                    {title:"نوع لوگو", field:"logo_class_name", hozAlign:'center',headerHozAlign:'center',resizable:true, widthGrow:6,headerFilter:"input",topCalc:"count"},
+                    {title:"تاریخ ایجاد", field:"create_date", hozAlign:'center',headerHozAlign:'center',resizable:true, widthGrow:3,headerFilter:"input",topCalc:"count"},
                 ]
             })
         }
