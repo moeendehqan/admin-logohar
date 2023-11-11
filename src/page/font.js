@@ -80,8 +80,8 @@ const Font = () =>{
                 dataTreeStartExpanded:false,
                 rowContextMenu: rowMenu,
                 columns:[
-                    {title:"نام", field:"name", hozAlign:'center',headerHozAlign:'center',resizable:true, widthGrow:3,headerFilter:"input",,topCalc:"count"},
-                    {title:"وزن", field:"weight", hozAlign:'center',headerHozAlign:'center',resizable:true, widthGrow:3,headerFilter:"input",,topCalc:"count"},
+                    {title:"نام", field:"name", hozAlign:'center',headerHozAlign:'center',resizable:true, widthGrow:3,headerFilter:"input",topCalc:"count"},
+                    {title:"وزن", field:"weight", hozAlign:'center',headerHozAlign:'center',resizable:true, widthGrow:3,headerFilter:"input",topCalc:"count"},
                     {title:"نام فایل", field:"file_name", hozAlign:'center',headerHozAlign:'center',resizable:true, widthGrow:3,headerFilter:"input",topCalc:"count"},
                     {title:"رشته های صنفی", field:"jobs_name", hozAlign:'center',headerHozAlign:'center',resizable:true, widthGrow:6,headerFilter:"input",topCalc:"count"},
                     {title:"نوع لوگو", field:"logo_class_name", hozAlign:'center',headerHozAlign:'center',resizable:true, widthGrow:6,headerFilter:"input",topCalc:"count"},
